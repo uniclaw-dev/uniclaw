@@ -6,7 +6,7 @@ MESSAGE="${1:-check}"
 TARGET_SESSION="${2:-1}"
 
 # Escape double quotes for AppleScript
-ESCAPED_MESSAGE="${MESSAGE//"/\"}"
+ESCAPED_MESSAGE="${MESSAGE//\"/\\\"}"
 
 osascript <<EOF
 tell application "iTerm"
