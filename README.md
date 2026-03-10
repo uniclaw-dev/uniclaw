@@ -102,7 +102,7 @@ friday: meanwhile, review this PR
 | File | Purpose |
 |------|---------|
 | `uniclaw-agent.js` | Monitors Slack DM, dispatches tasks, sends results |
-| `notify-other-agent.js` | Sends input to iTerm pane via AppleScript |
+| `notify-other-session.sh` | Sends input to iTerm pane via AppleScript |
 | `run.sh` | Start/stop/status management script |
 | `start-headless.sh` | Start headless Chrome with debug port for cookie export |
 | `start-chrome-debug.sh` | Start Chrome with Slack session |
@@ -136,7 +136,7 @@ friday: meanwhile, review this PR
 # Pane 1: claude
 # Pane 2: claude
 # 5. Start UniClaw
-/run.sh start
+./run.sh start
 ```
 
 ### Daily Startup (after first-time setup)
@@ -147,7 +147,7 @@ friday: meanwhile, review this PR
 # Pane 1: claude
 # Pane 2: claude
 # 3. Start UniClaw
-/run. sh start
+./run.sh start
 ```
 
 **That's it!** Send messages in Slack DM Like 'jarvis: hello to test.
@@ -180,8 +180,7 @@ UniClaw uses **Agent Names** as message prefixes to route tasks to the correct t
 ### How It Works:**
 - You prefix your Slack message with an Agent Name (e.g.g., `jarvis:`)
 - UniClaw determines which iTerm pane receives the task
-- The prefix determines which iTerm pane receives the task
-- Responses are tagged with the agent name (e.g.g., `jarvis:`)
+- Responses are tagged with the agent name (e.g., `jarvis>`)
 
 ### Examples
 
@@ -234,23 +233,26 @@ friday: refactor module B
 ## Management
 
 ```bash
-./run.sh start    # Start agent
-./run.sh stop     # Stop agent
-./run.sh status   # Check if running
-./run.sh restart  # Restart agent
-./run.sh logs     # Follow logs
+./run.sh start       # Start agent
+./run.sh stop        # Stop agent
+./run.sh stop-chrome # Stop Chrome 9223
+./run.sh status      # Check if running
+./run.sh restart     # Restart agent (keeps Chrome running)
+./run.sh logs        # Follow logs
 ```
+
+Note: `restart` only restarts the agent, not Chrome. Use `stop-chrome` separately if needed.
 Message Flow
 1. `uniclaw-agent.js` polls Slack DM every 10 seconds via headless Chrome
 2. Detects messages starting with agent names (e.g., `jarvis:`, `friday:`)
 3. Checks if response already exists (e.g. `jarvis:`) - skip if so
-4. Writes task to pending_task_<agent> (e.g.g., `pending_task_jarvis`)
+4. Writes task to pending_task_<agent> (e.g., `pending_task_jarvis`)
 5. Calls notify-other-session.sh which:
-- Copies the task prompt to clipboard
-- Selects the target iTerm pane 
-- Paste(Cmd+V) and presses Enter (key code 76)
+- Selects the target iTerm pane
+- Writes the task prompt
+- Presses Enter to submit
 6. Terminal agent receives the task and executes it
-7.Agent writes results to task_result_<agent> (in chunks if long)
+7. Agent writes results to task_result_<agent> (in chunks if long)
 8. `uniclaw-agent.js` picks up result and sends to Slack DM
 
 ## Configuration
@@ -258,40 +260,44 @@ Edit the CONFIG section in uniclaw-agent.js:
 
 ```javascript
 const CONFIG = {
-// Chrome DevTools Protocol
-cdpPort: 9223, pageld: null, checkInterval: 10000,
-// Headless Chrome port
-/ Auto-detected on startup
-// 10 seconds
-Working directory for task files workDir: '/Users/yourname/uniclaw ,
-// Target DM username - always send messages to this DM
-// Set to null to send to current active chat (old behavior)
-dmTarget: 'Your Name [Team]you',
-// Agent Name to iTerm Pane mapping
-agents: {
-'jarvis':
-'friday':
-1
-2
-'eleven': 3,
+  // Chrome DevTools Protocol
+  cdpPort: 9223,        // Headless Chrome port
+  pageId: null,         // Auto-detected on startup
+  checkInterval: 10000, // 10 seconds
+
+  // Working directory for task files
+  workDir: '/Users/yourname/uniclaw',
+
+  // Target DM username - always send messages to this DM
+  // Set to null to send to current active chat (old behavior)
+  dmTarget: 'Your Name [Team]you',
+
+  // Agent Name to iTerm Pane mapping
+  agents: {
+    'jarvis': 1,
+    'friday': 2,
+    'eleven': 3,
+  }
+}
+```
+
 ### DM Target
-The dmTarget'
-option ensures all responses are sent to a specific DM, even if you're viewing a different channel in Chrome:
-- Set to your Slack display name as shown in sidebar (e.g.,
-• 'Your Name [Team]you"')
-- Set to
-null' to send to whatever chat is currently open (old behavior)
+
+The `dmTarget` option ensures all responses are sent to a specific DM, even if you're viewing a different channel in Chrome:
+- Set to your Slack display name as shown in sidebar (e.g., `'Your Name [Team]you'`)
+- Set to `null` to send to whatever chat is currently open (old behavior)
+
 ### Add more agents
-Add new entries to
-'CONFIG. agents:
-• javascript
+
+Add new entries to `CONFIG.agents`:
+
+```javascript
 agents: {
-'jarvis': 1,
-'friday': 2,
-'eleven':
-3
-'ultron': 4,
-// Any string works
+  'jarvis': 1,
+  'friday': 2,
+  'eleven': 3,
+  'ultron': 4,  // Any string works
+}
 ## Extending
 ### Support other chat platforms
 The Chrome DevTools approach works with any browser-based chat:
@@ -311,7 +317,7 @@ curl -s http://127.0.0.1:9222/json/version
 ### Headless Chrome not connecting to Slack
 ```bash
 # Check headless Chrome status
-curl-s http://127.0.0.1:9223/json/version
+curl -s http://127.0.0.1:9223/json/version
 # Force restart headless Chrome with fresh cookies
 ./run.sh restart
 ```
@@ -333,7 +339,7 @@ curl -s http://127.0.0.1:9223/json | grep -i slack
 ### Messages not being picked up （stale page）
 ```bash
 # Restart to get fresh headless Chrome session
-/run.sh restart
+./run.sh restart
 ```
 ### Check agent logs 
 ```bash
