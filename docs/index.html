@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniClaw - Universal AI Agent Bridge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .tagline {
+            font-size: 24px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        main {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 60px 0;
+        }
+
+        section {
+            padding: 40px 0;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            margin: 20px 0;
+        }
+
+        .code-block code {
+            color: #a6e22e;
+        }
+
+        .agent-list {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .agent {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        footer {
+            background: #2d2d2d;
+            color: #999;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36px; }
+            .tagline { font-size: 18px; }
+            .buttons { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">🐾</div>
+            <h1>UniClaw</h1>
+            <p class="tagline">Universal AI Agent Bridge — Route tasks from Slack to any terminal-based AI agent</p>
+            <div class="buttons">
+                <a href="https://github.com/uniclaw-dev/uniclaw" class="btn btn-primary">View on GitHub</a>
+                <a href="#get-started" class="btn btn-secondary">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section>
+                <h2>What is UniClaw?</h2>
+                <p>UniClaw routes tasks from <span class="highlight">Slack DM</span> to <span class="highlight">terminal-based AI agents</span> like Claude Code, Opencode, Aider, and more. Run multiple agents in parallel across iTerm panes — no more blocking on long tasks.</p>
+            </section>
+
+            <section>
+                <h2>Key Features</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Parallel Execution</h3>
+                        <p>Run jarvis on tests, friday on code review, and eleven on documentation — all at the same time.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Cross-Agent Observability</h3>
+                        <p>Ask friday to check jarvis's progress. Agents can read each other's output files.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🤖</div>
+                        <h3>Universal Agent Support</h3>
+                        <p>Works with Claude Code, Opencode, Aider, Codex CLI, Gemini CLI — any terminal agent.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">💬</div>
+                        <h3>Slack Native</h3>
+                        <p>Send tasks from your phone. Get chunked responses for long outputs.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Smart Routing</h3>
+                        <p>Prefix messages with agent names: <code>jarvis:</code>, <code>friday:</code>, <code>eleven:</code></p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Self-Hosted</h3>
+                        <p>Your agents, your machine, your API keys. No external services required.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>How It Works</h2>
+                <div class="agent-list">
+                    <div class="agent">jarvis → Pane 1</div>
+                    <div class="agent">friday → Pane 2</div>
+                    <div class="agent">eleven → Pane 3</div>
+                </div>
+                <div class="code-block">
+<pre># You send in Slack DM
+jarvis: run all e2e tests
+
+# jarvis starts working (pane 1)
+# While jarvis is busy, you ask friday (pane 2):
+friday: what's the status of jarvis's tests?
+
+# friday reads jarvis's output file and reports back</pre>
+                </div>
+            </section>
+
+            <section id="get-started">
+                <h2>Quick Start</h2>
+                <div class="code-block">
+<pre># 1. Clone and setup
+git clone https://github.com/uniclaw-dev/uniclaw.git
+cd uniclaw && npm install
+
+# 2. Start debug Chrome and login to Slack
+./start-chrome-debug.sh
+
+# 3. Start agents in iTerm panes
+# Pane 1: claude
+# Pane 2: claude
+
+# 4. Start UniClaw
+./run.sh start
+
+# 5. Send tasks from Slack DM
+jarvis: status</pre>
+                </div>
+            </section>
+
+            <section>
+                <h2>Architecture</h2>
+                <p>UniClaw uses Chrome DevTools Protocol to monitor Slack web, then dispatches tasks to iTerm panes via AppleScript.</p>
+                <div class="code-block">
+<pre>Slack DM → Chrome (port 9223) → uniclaw-agent.js → iTerm Pane → Claude Code
+                ↑                                              ↓
+                └────────────── Response ←─────────────────────┘</pre>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>UniClaw is open source. <a href="https://github.com/uniclaw-dev/uniclaw">Star it on GitHub</a> 🌟</p>
+            <p style="margin-top: 10px;">Made with 🐾 by <a href="https://github.com/uniclaw-dev">uniclaw-dev</a></p>
+        </div>
+    </footer>
+</body>
+</html>
