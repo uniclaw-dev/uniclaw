@@ -290,10 +290,11 @@ jarvis: status</pre>
             <section>
                 <h2>Architecture</h2>
                 <p>UniClaw uses Chrome DevTools Protocol to monitor Slack web, then dispatches tasks to iTerm panes via AppleScript.</p>
-                <div class="code-block">
-<pre>Slack DM → Chrome (port 9223) → uniclaw-agent.js → iTerm Pane → Claude Code
-                ↑                                              ↓
-                └────────────── Response ←─────────────────────┘</pre>
+                <div style="margin: 30px 0; text-align: center;">
+                    <img src="architecture.svg" alt="UniClaw Architecture" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+                </div>
+                <div style="margin: 30px 0; text-align: center;">
+                    <img src="datapath.svg" alt="UniClaw Data Flow" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 </div>
             </section>
         </div>

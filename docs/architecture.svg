@@ -1,0 +1,118 @@
+<svg width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font-family: Arial, sans-serif; font-size: 28px; font-weight: bold; text-anchor: middle; }
+    .subtitle { font-family: Arial, sans-serif; font-size: 18px; text-anchor: middle; }
+    .box-title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; text-anchor: middle; }
+    .box-text { font-family: Arial, sans-serif; font-size: 16px; text-anchor: middle; }
+    .label-text { font-family: Arial, sans-serif; font-size: 14px; }
+    .concept-title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; }
+    .concept-text { font-family: Arial, sans-serif; font-size: 16px; }
+    .file-text { font-family: 'Courier New', monospace; font-size: 14px; }
+    .terminal-text { font-family: 'Courier New', monospace; font-size: 16px; font-weight: bold; text-anchor: middle; }
+    .terminal-subtext { font-family: 'Courier New', monospace; font-size: 14px; text-anchor: middle; }
+    .border-box { stroke: black; stroke-width: 1; fill: none; }
+    .dashed-box { stroke: #888; stroke-width: 2; stroke-dasharray: 8,8; fill: #f8f8f8; }
+    .arrow { stroke: black; stroke-width: 2; fill: none; }
+    .dashed-arrow { stroke: black; stroke-width: 1.5; stroke-dasharray: 6,6; fill: none; }
+    .chrome-box { stroke: #4285F4; stroke-width: 2; fill: #E8F0FE; }
+    .slack-webapp-box { stroke: #E01E5A; stroke-width: 1.5; fill: #FDF1F5; }
+    .agent-js-box { stroke: #1D1C1D; stroke-width: 2; fill: #EBEBEB; }
+    .shared-files-box { stroke: #FFCC00; stroke-width: 1.5; fill: #FFF9E6; }
+    .terminal-container-box { stroke: #2A2A2A; stroke-width: 2; fill: #F5F5F5; }
+    .agent-pane-box { stroke: #61DAFB; stroke-width: 1.5; fill: #E6FAFF; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="12" markerHeight="9" refX="0" refY="4.5" orient="auto">
+      <polygon points="0 0, 12 4.5, 0 9" fill="black" />
+    </marker>
+  </defs>
+
+  <text x="600" y="50" class="title">UniClaw Architecture</text>
+  <text x="600" y="80" class="subtitle">Universal AI Agent Router via Slack DM</text>
+
+  <rect x="50" y="110" width="180" height="90" rx="10" class="border-box" fill="#E8F0FE" stroke="#4285F4" stroke-width="1.5" />
+  <text x="140" y="140" class="box-title">User</text>
+  <text x="140" y="165" class="box-text">Phone / Desktop</text>
+  <text x="140" y="190" class="box-text">"jarvis: run tests"</text>
+
+  <rect x="300" y="110" width="160" height="90" rx="10" class="border-box" fill="#FFF9E6" stroke="#FFCC00" stroke-width="1.5" />
+  <text x="380" y="140" class="box-title">Slack Cloud</text>
+  <text x="380" y="165" class="box-text">Slack Server</text>
+  <text x="380" y="190" class="box-text">sync messages</text>
+
+  <rect x="800" y="110" width="200" height="150" rx="10" class="border-box" fill="#EBEBEB" stroke="#1D1C1D" stroke-width="1.5" />
+  <text x="815" y="140" class="concept-title">Concept Mapping</text>
+  <text x="815" y="165" class="concept-text">Gateway: uniclaw-agent.js</text>
+  <text x="815" y="190" class="concept-text">Channel: Chrome + Slack</text>
+  <text x="815" y="215" class="concept-text">Agent: iTerm Pane</text>
+  <text x="815" y="240" class="concept-text">Tools: Native agent tools</text>
+  <text x="815" y="255" class="label-text" style="font-size: 11px;">(git, fs, terminal, etc.)</text>
+
+  <rect x="30" y="270" width="1140" height="600" rx="15" class="dashed-box" />
+  <text x="600" y="300" class="box-title" style="font-size: 20px;">YOUR MACHINE</text>
+
+  <rect x="250" y="320" width="300" height="180" rx="10" class="chrome-box" />
+  <text x="400" y="350" class="box-title">Chrome Browser</text>
+  <text x="400" y="375" class="label-text">--remote-debugging-port=9222</text>
+  <rect x="280" y="400" width="240" height="90" rx="5" class="slack-webapp-box" />
+  <text x="400" y="430" class="box-title">Slack Web App</text>
+  <text x="400" y="455" class="label-text">(CHANNEL)</text>
+  <text x="400" y="480" class="label-text">DM conversation</text>
+
+  <rect x="650" y="330" width="280" height="200" rx="10" class="agent-js-box" />
+  <text x="790" y="360" class="box-title">uniclaw-agent.js</text>
+  <text x="790" y="385" class="label-text">(GATEWAY)</text>
+  <line x1="680" y1="400" x2="900" y2="400" stroke="black" stroke-width="1.5" />
+  <text x="680" y="420" class="label-text">• Poll DOM every 10s</text>
+  <text x="680" y="445" class="label-text">• Parse agent name prefixes</text>
+  <text x="680" y="470" class="label-text">• Route to correct pane</text>
+  <text x="680" y="495" class="label-text">• Send results back to DM</text>
+
+  <rect x="50" y="580" width="180" height="250" rx="10" class="shared-files-box" />
+  <text x="140" y="610" class="box-title">Shared Files</text>
+  <line x1="70" y1="620" x2="210" y2="620" stroke="black" stroke-width="1.5" />
+  <text x="70" y="645" class="file-text">task_result_jarvis</text>
+  <text x="70" y="670" class="file-text">task_result_friday</text>
+  <text x="70" y="705" class="file-text">pending_task_jarvis</text>
+  <text x="70" y="730" class="file-text">pending_task_friday</text>
+  <text x="70" y="770" class="label-text" style="font-size: 13px;">Agent polls, sends to Slack.</text>
+  <text x="70" y="790" class="label-text" style="font-size: 13px;">Deleted when task done.</text>
+
+  <rect x="250" y="640" width="880" height="200" rx="10" class="terminal-container-box" />
+  <text x="690" y="670" class="box-title">iTerm2 Terminal</text>
+
+  <rect x="290" y="690" width="380" height="130" rx="5" class="agent-pane-box" />
+  <text x="480" y="715" class="box-title">Pane 1 (AGENT SESSION)</text>
+  <line x1="330" y1="730" x2="630" y2="730" stroke="black" stroke-width="0.5" />
+  <text x="480" y="755" class="terminal-text">$ claude</text>
+  <text x="480" y="780" class="terminal-subtext">(or opencode, aider, etc.)</text>
+  <text x="480" y="805" class="terminal-subtext">[executes task, writes result]</text>
+
+  <rect x="710" y="690" width="380" height="130" rx="5" class="agent-pane-box" />
+  <text x="900" y="715" class="box-title">Pane 2 (AGENT SESSION)</text>
+  <line x1="750" y1="730" x2="1050" y2="730" stroke="black" stroke-width="0.5" />
+  <text x="900" y="755" class="terminal-text">$ claude</text>
+  <text x="900" y="780" class="terminal-subtext">(or aider, gemini-cli, etc.)</text>
+  <text x="900" y="805" class="terminal-subtext">[executes task, writes result]</text>
+
+  <line x1="230" y1="155" x2="300" y2="155" class="arrow" marker-end="url(#arrowhead)" />
+
+  <line x1="380" y1="200" x2="380" y2="310" class="arrow" marker-end="url(#arrowhead)" stroke-width="2.5" />
+  <text x="390" y="255" class="label-text">sync</text>
+
+  <path d="M 520 445 H 640" class="dashed-arrow" marker-end="url(#arrowhead)" stroke-width="2" />
+  <text x="540" y="430" class="label-text">CDP WebSocket</text>
+  <text x="540" y="460" class="file-text" style="font-size: 11px; text-anchor: middle;">ws://localhost:9222</text>
+
+  <line x1="790" y1="530" x2="790" y2="630" class="arrow" marker-end="url(#arrowhead)" stroke-width="2.5" />
+  <text x="810" y="580" class="label-text">AppleScript</text>
+  <text x="810" y="600" class="label-text">(clipboard + paste)</text>
+
+  <line x1="250" y1="710" x2="230" y2="670" class="dashed-arrow" marker-end="url(#arrowhead)" stroke-width="1.8" />
+  <text x="240" y="690" class="label-text">poll</text>
+
+  <path d="M 140 580 C 140 520, 600 520, 600 500" class="dashed-arrow" marker-end="url(#arrowhead)" stroke-width="2" />
+  <text x="380" y="515" class="label-text">poll &amp; read</text>
+
+</svg>
