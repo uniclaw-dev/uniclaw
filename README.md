@@ -21,6 +21,7 @@ Similar to [OpenClaw](https://github.com/openclaw/openclaw) but optimized for de
 
 ### 1. Multi-Agent Parallel Execution
 **OpenClaw:** Single agent per session. If busy → request is queued or blocked.
+
 **UniClaw:** Multiple independent agents. One can work while another responds.
 ```
 # jarvis running Long task
