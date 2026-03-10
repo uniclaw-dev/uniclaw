@@ -1,0 +1,87 @@
+<svg width="800" height="1200" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 24px; font-weight: bold; text-anchor: middle; fill: #1a1a1a; }
+    .subtitle { font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; text-anchor: middle; fill: #666; }
+    .step-num { font-family: 'Segoe UI', Arial, sans-serif; font-size: 20px; font-weight: bold; fill: #333; }
+    .box-header { font-family: 'Segoe UI', Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #000; }
+    .box-body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 15px; fill: #333; }
+    .box-subtext { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; fill: #555; }
+    
+    /* Box Colors */
+    .blue-box { fill: #eef6ff; stroke: #4a90e2; stroke-width: 2; }
+    .orange-box { fill: #fff7e6; stroke: #f5a623; stroke-width: 2; }
+    .green-box { fill: #f2faf2; stroke: #7db37d; stroke-width: 2; }
+    .grey-box { fill: #f9f9f9; stroke: #9b9b9b; stroke-width: 2; }
+    
+    .arrow { stroke: #333; stroke-width: 2.5; fill: none; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="white" />
+
+  <text x="400" y="40" class="title">UniClaw Data Flow</text>
+  <text x="400" y="65" class="subtitle">Message routing from Slack DM to Terminal Agent</text>
+
+  <rect x="150" y="100" width="500" height="100" rx="8" class="blue-box" />
+  <text x="175" y="135" class="step-num">1</text>
+  <text x="210" y="135" class="box-header">USER types in Slack DM</text>
+  <text x="210" y="160" class="box-body">"jarvis: run tests"</text>
+  <text x="210" y="180" class="box-subtext">(via phone or desktop)</text>
+
+  <line x1="400" y1="200" x2="400" y2="230" class="arrow" marker-end="url(#arrowhead)" />
+
+  <rect x="150" y="240" width="500" height="100" rx="8" class="orange-box" />
+  <text x="175" y="275" class="step-num">2</text>
+  <text x="210" y="275" class="box-header">CHROME renders message</text>
+  <text x="210" y="300" class="box-body">Slack web app syncs and displays the message</text>
+  <text x="210" y="320" class="box-subtext">Message visible in DOM</text>
+
+  <line x1="400" y1="340" x2="400" y2="370" class="arrow" marker-end="url(#arrowhead)" />
+
+  <rect x="150" y="380" width="500" height="130" rx="8" class="blue-box" />
+  <text x="175" y="415" class="step-num">3</text>
+  <text x="210" y="415" class="box-header">GATEWAY polls Chrome via CDP</text>
+  <text x="210" y="445" class="box-body">• Reads DOM to find messages with agent name prefix</text>
+  <text x="210" y="470" class="box-body">• Parses "jarvis:" → extracts task "run tests"</text>
+  <text x="210" y="495" class="box-body">• Maps agent name to pane: jarvis → Pane 1</text>
+
+  <line x1="400" y1="510" x2="400" y2="540" class="arrow" marker-end="url(#arrowhead)" />
+
+  <rect x="150" y="550" width="500" height="130" rx="8" class="blue-box" />
+  <text x="175" y="585" class="step-num">4</text>
+  <text x="210" y="585" class="box-header">GATEWAY triggers iTerm via AppleScript</text>
+  <text x="210" y="615" class="box-body">• Copies task prompt to clipboard</text>
+  <text x="210" y="640" class="box-body">• Selects target pane (Pane 1)</text>
+  <text x="210" y="665" class="box-body">• Pastes (Cmd+V) and presses Enter</text>
+
+  <line x1="400" y1="680" x2="400" y2="710" class="arrow" marker-end="url(#arrowhead)" />
+
+  <rect x="150" y="720" width="500" height="120" rx="8" class="green-box" />
+  <text x="175" y="755" class="step-num">5</text>
+  <text x="210" y="755" class="box-header">AGENT executes task</text>
+  <text x="210" y="785" class="box-body">• Claude Code (or other agent) receives prompt</text>
+  <text x="210" y="805" class="box-body">• Executes: runs tests</text>
+  <text x="210" y="825" class="box-body">• Writes output to task_result_jarvis</text>
+
+  <line x1="400" y1="840" x2="400" y2="870" class="arrow" marker-end="url(#arrowhead)" />
+
+  <rect x="150" y="880" width="500" height="120" rx="8" class="blue-box" />
+  <text x="175" y="915" class="step-num">6</text>
+  <text x="210" y="915" class="box-header">GATEWAY detects result file</text>
+  <text x="210" y="945" class="box-body">• Polls for task_result_jarvis</text>
+  <text x="210" y="965" class="box-body">• Reads content and sends to Slack DM via CDP</text>
+  <text x="210" y="985" class="box-body">• Deletes result file after sending</text>
+
+  <line x1="400" y1="1000" x2="400" y2="1030" class="arrow" marker-end="url(#arrowhead)" />
+
+  <rect x="150" y="1040" width="500" height="90" rx="8" class="grey-box" />
+  <text x="175" y="1075" class="step-num">7</text>
+  <text x="210" y="1075" class="box-header">USER sees result in Slack DM</text>
+  <text x="210" y="1105" class="box-body">"jarvis> Tests passed!"</text>
+
+</svg>

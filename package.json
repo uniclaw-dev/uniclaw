@@ -11,6 +11,6 @@
 "license": "ISC",
 "type": "commonjs",
 "dependencies":{
-"wS": "^8.19.0"
+"ws": "^8.19.0"
 }
 }

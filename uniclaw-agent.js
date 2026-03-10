@@ -13,14 +13,14 @@ const CONFIG = {
   checkInterval: 10000, // 10 seconds
 
   // Working directory for task files
-  workDir: '/Users/jemeng/uniclaw',
+  workDir: '/Users/jesse/uniclaw',
 
   // Target DM - always send messages to this DM
   // Can be:
   //   - Exact display name from sidebar (use debug script to find)
   //   - null: send to current active chat (old behavior)
   // Note: Self-DM shows as "Name [Team]you" (no space before "you")
-  dmTarget: 'Jesse Meng [Tech Infrastructure Architects]you',
+  dmTarget: null,  // Use current chat (already on mengfj)
 
   // Agent Name to iTerm Pane mapping
   agents: {
@@ -107,7 +107,7 @@ function connectAndRun(expression) {
     let timeout = setTimeout(() => {
       ws.close();
       reject(new Error('WebSocket timeout'));
-    }, 10000);
+    }, 30000);
 
     ws.on('open', () => {
       ws.send(JSON.stringify({
@@ -417,7 +417,8 @@ Reply via: ${resultFile}
       try {
         // Escape special chars for shell
         const escapedPrompt = prompt.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/'/g, "\\'").replace(/\$/g, '\\$');
-        execSync(`${CONFIG.workDir}/notify-other-session.sh "${escapedPrompt}" ${pane}`, { stdio: 'inherit' });
+        const scriptDir = __dirname;
+        execSync(`${scriptDir}/notify-other-session.sh "${escapedPrompt}" ${pane}`, { stdio: 'inherit' });
         console.log(`[NOTIFY] Triggered agent ${agentId} (iTerm pane ${pane})`);
       } catch (err) {
         console.error(`[ERROR] Failed to notify agent ${agentId}: ${err.message}`);
@@ -583,12 +584,16 @@ async function main() {
       // Initialize session tracking
       lastSessionStatus[s.agentId] = s.session === 'claude';
     });
+    console.log('[STARTUP] Sending startup message...');
     await sendMessage(statusMsg);
+    console.log('[STARTUP] Startup message sent');
   } catch (err) {
     console.error('[STARTUP] Failed to detect sessions:', err.message);
   }
 
+  console.log('[STARTUP] Starting check loop...');
   await checkLoop();
+  console.log('[STARTUP] First check done, starting interval...');
   setInterval(checkLoop, CONFIG.checkInterval);
 }
 

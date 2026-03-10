@@ -1,0 +1,8 @@
+node_modules/
+agent.log
+agent.pid
+slack-cookies.json
+.DS_Store
+*.swp
+*.swo
+*~
