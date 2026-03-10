@@ -1,10 +1,10 @@
-# UniClaw 🐾
+# UniClaw 🦞
 
 A personal AI agent that routes tasks from Slack DM to terminal-based AI agents (Claude Code, Opencode, Aider, etc.).
 
 ## Why UniClaw?
 
-Similar to [OpenClaw](https://github.com/openclaw/openclaw) (🐻) but optimized for developer workflows with **universal agent support**.
+Similar to [OpenClaw](https://github.com/openclaw/openclaw) but optimized for developer workflows with **universal agent support**.
 
 ## Feature Comparison
 
@@ -73,11 +73,11 @@ friday: meanwhile, review this PR
 
 ### System Diagram
 
-![UniClaw Architecture](docs/architecture.png)
+![UniClaw Architecture](architecture.svg)
 
 ### Data Flow
 
-![UniClaw Data Flow](docs/dataflow.png)
+![UniClaw Data Flow](datapath.svg)
 
 ## Features
 
