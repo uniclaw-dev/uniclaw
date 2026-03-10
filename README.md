@@ -1,6 +1,8 @@
 # UniClaw 🦞
 
-A personal AI agent that routes tasks from Slack DM to terminal-based AI agents (Claude Code, Opencode, Aider, etc.).
+A personal AI agent that routes tasks from **any browser-based chat** (Slack, Discord, Teams, etc.) to terminal-based AI agents (Claude Code, Opencode, Aider, etc.).
+
+> Slack is the current implementation, but the Chrome DevTools approach works with any web-based messaging platform.
 
 ## Why UniClaw?
 
@@ -11,7 +13,7 @@ Similar to [OpenClaw](https://github.com/openclaw/openclaw) but optimized for de
 | Feature | OpenClaw | UniClaw |
 |---------|----------|---------|
 | Agent | API-based LLMs (OpenAI, etc.) | Any terminal agent (Claude Code, Opencode, Aider) |
-| Channels | 20+ native integrations | Any browser-based chat |
+| Channels | 20+ native integrations | **Any browser-based chat** (Slack, Teams, Discord, etc.) |
 | Tools | bash, read/write, browser | Full agent capabilities |
 | Setup | npm + wizard | Node + Chrome debug |
 | Complexity | Full platform (~265K LOC) | Lightweight (~250 LOC) |
@@ -48,7 +50,16 @@ friday: meanwhile, review this PR
 - Any terminal-based AI agent works
 - Mix different agents across panes
 
-### 5. Full System Access
+### 5. Leverage Existing Agent Ecosystem
+**OpenClaw:** Creates new agents from scratch via API — no skills, no memory, no context.
+
+**UniClaw:** Uses your existing Claude Code sessions with full ecosystem:
+- **Skills**: All `/skill` commands work (git, bash, code analysis, etc.)
+- **Memory**: Claude remembers your codebase, preferences, patterns
+- **Context**: Project-specific knowledge from `.claude/` directory
+- **No retraining**: Your agent already knows your project
+
+### 6. Full System Access
 - OpenClaw: Limited to defined tool APIs
 - UniClaw: Full agent capabilities (git, tests, file system, terminal)
 
@@ -301,9 +312,13 @@ agents: {
 }
 ## Extending
 ### Support other chat platforms
-The Chrome DevTools approach works with any browser-based chat:
-- Change DOM selectors for Teams, Discord web, etc.
-- Update prefix patterns
+UniClaw's Chrome DevTools approach works with **any browser-based chat platform**:
+- **Discord**: Update DOM selectors for Discord web
+- **Microsoft Teams**: Change selectors for Teams web
+- **Lark**: Adapt for Lark web interface
+- **DingTalk**: Support DingTalk web
+
+Just change the CSS selectors in `uniclaw-agent.js` — no API integrations, no bot setup, no webhook configuration needed.
 
 
 
