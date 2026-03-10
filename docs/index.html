@@ -207,7 +207,7 @@
         <div class="container">
             <section>
                 <h2>What is UniClaw?</h2>
-                <p>UniClaw routes tasks from <span class="highlight">Slack DM</span> to <span class="highlight">terminal-based AI agents</span> like Claude Code, Opencode, Aider, and more. Run multiple agents in parallel across iTerm panes — no more blocking on long tasks.</p>
+                <p>UniClaw routes tasks from <span class="highlight">any browser-based chat</span> (Slack, Teams, Discord, etc.) to <span class="highlight">terminal-based AI agents</span> like Claude Code, Opencode, Aider, and more. Run multiple agents in parallel across iTerm panes — no more blocking on long tasks.</p>
             </section>
 
             <section>
@@ -254,7 +254,7 @@
                     <div class="agent">eleven → Pane 3</div>
                 </div>
                 <div class="code-block">
-<pre># You send in Slack DM
+<pre># You send in your chat app
 jarvis: run all e2e tests
 
 # jarvis starts working (pane 1)
@@ -282,14 +282,14 @@ cd uniclaw && npm install
 # 4. Start UniClaw
 ./run.sh start
 
-# 5. Send tasks from Slack DM
+# 5. Send tasks from your chat app
 jarvis: status</pre>
                 </div>
             </section>
 
             <section>
                 <h2>Architecture</h2>
-                <p>UniClaw uses Chrome DevTools Protocol to monitor Slack web, then dispatches tasks to iTerm panes via AppleScript.</p>
+                <p>UniClaw uses Chrome DevTools Protocol to monitor any web-based chat, then dispatches tasks to iTerm panes via AppleScript.</p>
                 <div style="margin: 30px 0; text-align: center;">
                     <img src="architecture.svg" alt="UniClaw Architecture" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
                 </div>
